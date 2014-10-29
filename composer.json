@@ -8,12 +8,21 @@
         "issues": "https://github.com/golovanov/php-ext-zendxml/issues?state=open"
     },
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "phalcon/zephir": "*"
     },
     "require-dev": {
         "zendframework/zendxml": "*",
         "fabpot/php-cs-fixer": "*@dev",
         "phpunit/phpunit": "~3.7"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "./vendor/bin/zephir build"
+        ],
+        "post-update-cmd": [
+            "./vendor/bin/zephir build"
+        ]
     },
     "authors": [
         {
