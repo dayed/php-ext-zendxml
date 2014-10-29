@@ -1,0 +1,24 @@
+{
+    "name": "golovanov/php-ext-zendxml",
+    "description": "ZendXml component delivered as a C-extension (Zephir)",
+    "keywords": ["zendxml", "xml", "extension", "zend", "zephir"],
+    "homepage": "https://github.com/golovanov/php-ext-zendxml/",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/golovanov/php-ext-zendxml/issues?state=open"
+    },
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+        "zendframework/zendxml": "*",
+        "fabpot/php-cs-fixer": "*@dev",
+        "phpunit/phpunit": "~3.7"
+    },
+    "authors": [
+        {
+            "name": "Igor Golovanov",
+            "email": "igor.golovanov@gmail.com"
+        }
+    ]
+}
