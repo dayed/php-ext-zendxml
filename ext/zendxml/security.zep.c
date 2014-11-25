@@ -90,15 +90,14 @@ PHP_METHOD(ZendXml_Security, heuristicScan) {
  */
 PHP_METHOD(ZendXml_Security, scan) {
 
-	HashTable *_12;
-	HashPosition _11;
-	zephir_nts_static zephir_fcall_cache_entry *_7 = NULL, *_8 = NULL;
-	zephir_fcall_cache_entry *_3 = NULL, *_4 = NULL, *_18 = NULL;
-	zend_class_entry *_2;
+	HashTable *_11;
+	HashPosition _10;
+	zephir_nts_static zephir_fcall_cache_entry *_6 = NULL, *_7 = NULL;
+	zephir_fcall_cache_entry *_2 = NULL, *_3 = NULL, *_17 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
 	zval *errorHandler;
 	zend_bool _0, simpleXml = 0;
-	zval *xml_param = NULL, *dom = NULL, *useInternalXmlErrors = NULL, *loadEntities = NULL, *result = NULL, *child = NULL, *isPhpFpm = NULL, *_1 = NULL, *_5 = NULL, _6, *_9, *_10 = NULL, **_13, *_14 = NULL, *_15 = NULL, *_16 = NULL, *_17 = NULL;
+	zval *xml_param = NULL, *dom = NULL, *useInternalXmlErrors = NULL, *loadEntities = NULL, *result = NULL, *child = NULL, *isPhpFpm = NULL, *_1 = NULL, *_4 = NULL, _5, *_8, *_9 = NULL, **_12, *_13 = NULL, *_14 = NULL, *_15 = NULL, *_16 = NULL;
 	zval *xml = NULL;
 
 	ZEPHIR_MM_GROW();
@@ -114,7 +113,7 @@ PHP_METHOD(ZendXml_Security, scan) {
 
 	_0 = Z_TYPE_P(dom) != IS_NULL;
 	if (_0) {
-		_0 = !zephir_is_instance_of(dom, SL("DOMDocument") TSRMLS_CC);
+		_0 = !zephir_instance_of_ev(dom, zephir_get_internal_ce(SS("domdocument") TSRMLS_CC) TSRMLS_CC);
 	}
 	if (_0) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'dom' must be an instance of 'DOMDocument'", "", 0);
@@ -129,73 +128,72 @@ PHP_METHOD(ZendXml_Security, scan) {
 	if (Z_TYPE_P(dom) == IS_NULL) {
 		simpleXml = 1;
 		ZEPHIR_INIT_NVAR(dom);
-		_2 = zend_fetch_class(SL("DOMDocument"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-		object_init_ex(dom, _2);
+		object_init_ex(dom, zephir_get_internal_ce(SS("domdocument") TSRMLS_CC));
 		ZEPHIR_CALL_METHOD(NULL, dom, "__construct", NULL);
 		zephir_check_call_status();
 	}
 	ZEPHIR_CALL_SELF(&isPhpFpm, "isphpfpm", NULL);
 	zephir_check_call_status();
 	if (!(zephir_is_true(isPhpFpm))) {
-		ZEPHIR_CALL_FUNCTION(&loadEntities, "libxml_disable_entity_loader", &_3, ZEPHIR_GLOBAL(global_true));
+		ZEPHIR_CALL_FUNCTION(&loadEntities, "libxml_disable_entity_loader", &_2, ZEPHIR_GLOBAL(global_true));
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(&useInternalXmlErrors, "libxml_use_internal_errors", &_4, ZEPHIR_GLOBAL(global_true));
+		ZEPHIR_CALL_FUNCTION(&useInternalXmlErrors, "libxml_use_internal_errors", &_3, ZEPHIR_GLOBAL(global_true));
 		zephir_check_call_status();
 	}
 	ZEPHIR_INIT_VAR(errorHandler);
 	array_init_size(errorHandler, 3);
-	ZEPHIR_INIT_VAR(_5);
-	ZVAL_STRING(_5, "ZendXml\\Security", 1);
-	zephir_array_fast_append(errorHandler, _5);
-	ZEPHIR_INIT_NVAR(_5);
-	ZVAL_STRING(_5, "scanErrorHandler", 1);
-	zephir_array_fast_append(errorHandler, _5);
-	ZEPHIR_SINIT_VAR(_6);
-	ZVAL_LONG(&_6, 2);
-	ZEPHIR_CALL_FUNCTION(NULL, "set_error_handler", &_7, errorHandler, &_6);
+	ZEPHIR_INIT_VAR(_4);
+	ZVAL_STRING(_4, "ZendXml\\Security", 1);
+	zephir_array_fast_append(errorHandler, _4);
+	ZEPHIR_INIT_NVAR(_4);
+	ZVAL_STRING(_4, "scanErrorHandler", 1);
+	zephir_array_fast_append(errorHandler, _4);
+	ZEPHIR_SINIT_VAR(_5);
+	ZVAL_LONG(&_5, 2);
+	ZEPHIR_CALL_FUNCTION(NULL, "set_error_handler", &_6, errorHandler, &_5);
 	zephir_check_call_status();
-	ZEPHIR_INIT_NVAR(_5);
-	ZVAL_LONG(_5, 2048);
-	ZEPHIR_CALL_METHOD(&result, dom, "loadxml", NULL, xml, _5);
+	ZEPHIR_INIT_NVAR(_4);
+	ZVAL_LONG(_4, 2048);
+	ZEPHIR_CALL_METHOD(&result, dom, "loadxml", NULL, xml, _4);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(NULL, "restore_error_handler", &_8);
+	ZEPHIR_CALL_FUNCTION(NULL, "restore_error_handler", &_7);
 	zephir_check_call_status();
 	if (!(zephir_is_true(isPhpFpm))) {
-		ZEPHIR_CALL_FUNCTION(NULL, "libxml_disable_entity_loader", &_3, loadEntities);
+		ZEPHIR_CALL_FUNCTION(NULL, "libxml_disable_entity_loader", &_2, loadEntities);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(NULL, "libxml_use_internal_errors", &_4, useInternalXmlErrors);
+		ZEPHIR_CALL_FUNCTION(NULL, "libxml_use_internal_errors", &_3, useInternalXmlErrors);
 		zephir_check_call_status();
 	}
 	if (!(zephir_is_true(result))) {
 		RETURN_MM_BOOL(0);
 	}
 	if (!(zephir_is_true(isPhpFpm))) {
-		ZEPHIR_OBS_VAR(_9);
-		zephir_read_property(&_9, dom, SL("childNodes"), PH_NOISY_CC);
-		ZEPHIR_CALL_FUNCTION(&_10, "iterator_to_array", NULL, _9);
+		ZEPHIR_OBS_VAR(_8);
+		zephir_read_property(&_8, dom, SL("childNodes"), PH_NOISY_CC);
+		ZEPHIR_CALL_FUNCTION(&_9, "iterator_to_array", NULL, _8);
 		zephir_check_call_status();
-		zephir_is_iterable(_10, &_12, &_11, 0, 0, "zendxml/security.zep", 91);
+		zephir_is_iterable(_9, &_11, &_10, 0, 0, "zendxml/security.zep", 91);
 		for (
-		  ; zephir_hash_get_current_data_ex(_12, (void**) &_13, &_11) == SUCCESS
-		  ; zephir_hash_move_forward_ex(_12, &_11)
+		  ; zephir_hash_get_current_data_ex(_11, (void**) &_12, &_10) == SUCCESS
+		  ; zephir_hash_move_forward_ex(_11, &_10)
 		) {
-			ZEPHIR_GET_HVALUE(child, _13);
-			ZEPHIR_OBS_NVAR(_14);
-			zephir_read_property(&_14, child, SL("nodeType"), PH_NOISY_CC);
-			if (ZEPHIR_IS_LONG_IDENTICAL(_14, 10)) {
+			ZEPHIR_GET_HVALUE(child, _12);
+			ZEPHIR_OBS_NVAR(_13);
+			zephir_read_property(&_13, child, SL("nodeType"), PH_NOISY_CC);
+			if (ZEPHIR_IS_LONG_IDENTICAL(_13, 10)) {
+				ZEPHIR_OBS_NVAR(_14);
+				zephir_read_property(&_14, child, SL("entities"), PH_NOISY_CC);
 				ZEPHIR_OBS_NVAR(_15);
-				zephir_read_property(&_15, child, SL("entities"), PH_NOISY_CC);
-				ZEPHIR_OBS_NVAR(_16);
-				zephir_read_property(&_16, _15, SL("length"), PH_NOISY_CC);
-				if (unlikely(ZEPHIR_GT_LONG(_16, 0))) {
-					ZEPHIR_INIT_LNVAR(_17);
-					object_init_ex(_17, zendxml_exception_runtimeexception_ce);
-					ZEPHIR_INIT_NVAR(_5);
-					ZVAL_STRING(_5, "Detected use of ENTITY in XML, disabled to prevent XXE/XEE attacks", ZEPHIR_TEMP_PARAM_COPY);
-					ZEPHIR_CALL_METHOD(NULL, _17, "__construct", &_18, _5);
-					zephir_check_temp_parameter(_5);
+				zephir_read_property(&_15, _14, SL("length"), PH_NOISY_CC);
+				if (unlikely(ZEPHIR_GT_LONG(_15, 0))) {
+					ZEPHIR_INIT_NVAR(_4);
+					object_init_ex(_4, zendxml_exception_runtimeexception_ce);
+					ZEPHIR_INIT_NVAR(_16);
+					ZVAL_STRING(_16, "Detected use of ENTITY in XML, disabled to prevent XXE/XEE attacks", ZEPHIR_TEMP_PARAM_COPY);
+					ZEPHIR_CALL_METHOD(NULL, _4, "__construct", &_17, _16);
+					zephir_check_temp_parameter(_16);
 					zephir_check_call_status();
-					zephir_throw_exception_debug(_17, "zendxml/security.zep", 87 TSRMLS_CC);
+					zephir_throw_exception_debug(_4, "zendxml/security.zep", 87 TSRMLS_CC);
 					ZEPHIR_MM_RESTORE();
 					return;
 				}
@@ -205,7 +203,7 @@ PHP_METHOD(ZendXml_Security, scan) {
 	if (simpleXml) {
 		ZEPHIR_CALL_FUNCTION(&result, "simplexml_import_dom", NULL, dom);
 		zephir_check_call_status();
-		if (!(zephir_is_instance_of(result, SL("SimpleXMLElement") TSRMLS_CC))) {
+		if (!(zephir_instance_of_ev(result, zephir_get_internal_ce(SS("simplexmlelement") TSRMLS_CC) TSRMLS_CC))) {
 			RETURN_MM_BOOL(0);
 		}
 		RETURN_CCTOR(result);
@@ -263,7 +261,7 @@ PHP_METHOD(ZendXml_Security, scanFile) {
 
 	_0 = Z_TYPE_P(dom) != IS_NULL;
 	if (_0) {
-		_0 = !zephir_is_instance_of(dom, SL("DOMDocument") TSRMLS_CC);
+		_0 = !zephir_instance_of_ev(dom, zephir_get_internal_ce(SS("domdocument") TSRMLS_CC) TSRMLS_CC);
 	}
 	if (_0) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'dom' must be an instance of 'DOMDocument'", "", 0);

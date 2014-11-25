@@ -4,13 +4,17 @@
 #ifndef PHP_ZENDXML_H
 #define PHP_ZENDXML_H 1
 
+#ifdef PHP_WIN32
+#define ZEPHIR_RELEASE 1
+#endif
+
 #include "kernel/globals.h"
 
 #define PHP_ZENDXML_NAME        "ZendXml"
 #define PHP_ZENDXML_VERSION     "1.0.0"
 #define PHP_ZENDXML_EXTNAME     "zendxml"
 #define PHP_ZENDXML_AUTHOR      "Igor Golovanov"
-#define PHP_ZENDXML_ZEPVERSION  "0.5.7a"
+#define PHP_ZENDXML_ZEPVERSION  "0.5.9a"
 #define PHP_ZENDXML_DESCRIPTION "An utility component for XML usage and best practices in PHP"
 
 
@@ -60,6 +64,8 @@ ZEND_EXTERN_MODULE_GLOBALS(zendxml)
 #else
 	#define ZEPHIR_VGLOBAL &(zendxml_globals)
 #endif
+
+#define ZEPHIR_API ZEND_API
 
 #define zephir_globals_def zendxml_globals
 #define zend_zephir_globals_def zend_zendxml_globals
